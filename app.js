@@ -6,7 +6,7 @@ const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
 
 const bookRouter = require('./routes/bookRoutes');
-const userRouter = require('./routes/userRouter');
+const userRouter = require('./routes/userRoutes');
 
 const app = express();
 
@@ -24,13 +24,7 @@ mongoose
 	})
 	.then(() => console.log('Successfully connected to DB'));
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
-
-if (process.env.NODE_ENV === 'development') {
-	app.use(morgan('dev'));
-}
+app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());

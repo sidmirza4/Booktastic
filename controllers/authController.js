@@ -26,7 +26,7 @@ const createSendToken = (user, statusCode, req, res) => {
 	res.status(statusCode).json({
 		status: 'success',
 		token,
-		data: user,
+		data: { email: user.email, name: user.name },
 	});
 };
 
@@ -98,3 +98,12 @@ exports.protect = catchAsync(async (req, res, next) => {
 	req.user = currentUser;
 	next();
 });
+
+exports.restrictTo = (...roles) => {
+	return (req, res, next) => {
+		if (!roles.includes(req.user.role)) {
+			return next(new AppError('You do not have permission', 403));
+		}
+		next();
+	};
+};
