@@ -5,6 +5,8 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
 
+const AppError = require('./utils/appError');
+const globalErrorHandler = require('./controllers/errorController');
 const cloudinaryConfig = require('./config/cloudinaryConfig');
 const bookRouter = require('./routes/bookRoutes');
 const userRouter = require('./routes/userRoutes');
@@ -16,14 +18,12 @@ dotenv.config({ path: './.env' });
 
 // DATABASE SETUP
 const dbUrl = process.env.DB_URL;
-mongoose
-	.connect(dbUrl, {
-		useNewUrlParser: true,
-		useCreateIndex: true,
-		useFindAndModify: false,
-		useUnifiedTopology: true,
-	})
-	.then(() => console.log('Successfully connected to DB'));
+mongoose.connect(dbUrl, {
+	useNewUrlParser: true,
+	useCreateIndex: true,
+	useFindAndModify: false,
+	useUnifiedTopology: true,
+});
 
 // cloudinary config middleware
 app.use(cloudinaryConfig);
@@ -36,5 +36,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 // ROUTER
 app.use('/api/books', bookRouter);
 app.use('/api/users', userRouter);
+
+app.all('*', (req, res, next) => {
+	next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
+});
+
+app.use(globalErrorHandler);
 
 module.exports = app;
