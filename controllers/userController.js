@@ -1,10 +1,10 @@
 const { uploader } = require('cloudinary').v2;
 const User = require('../models/userModel');
 const AppError = require('../utils/appError');
-const { getAll, getOne, updateOne, deleteOne } = require('./factory');
 const catchAsync = require('../utils/catchAsync');
 const { filterObj } = require('../utils/utilities');
 const { upload, dataUri } = require('../middlewares/multer');
+const { getAll, getOne, updateOne, deleteOne } = require('./factory');
 
 exports.getAllUsers = getAll(User);
 exports.getOneUser = getOne(User);
