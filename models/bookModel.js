@@ -6,7 +6,6 @@ const bookSchema = new mongoose.Schema({
 		type: String,
 		required: [true, 'A book must have a name'],
 		trim: true,
-		unique: true,
 		maxLength: [
 			100,
 			'A book cannot have title of more than 100 characters',
@@ -19,7 +18,13 @@ const bookSchema = new mongoose.Schema({
 		select: false,
 	},
 
+	cover: {
+		url: String,
+		publicId: String,
+	},
+
 	images: Array,
+
 	authors: {
 		type: Array,
 		required: [true, 'a book must have one or more author(s)'],

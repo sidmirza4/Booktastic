@@ -8,7 +8,13 @@ const router = express.Router();
 router
 	.route('/')
 	.get(bookController.getAllBooks)
-	.post(protect, restrictTo('editor', 'admin'), bookController.createBook);
+	.post(
+		protect,
+		restrictTo('editor', 'admin'),
+		bookController.processBookImages,
+		bookController.uploadBookImages,
+		bookController.createBook
+	);
 
 router
 	.route('/:id')

@@ -18,9 +18,6 @@ exports.upload = multer({
 	fileFilter: multerFilter,
 });
 
-exports.dataUri = req => {
-	return dUri.format(
-		path.extname(req.file.originalname).toString(),
-		req.file.buffer
-	);
+exports.dataUri = buffer => {
+	return dUri.format('.jpg', buffer);
 };

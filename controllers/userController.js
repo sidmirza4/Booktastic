@@ -33,7 +33,7 @@ exports.updateMe = catchAsync(async (req, res, next) => {
 	const filteredBody = filterObj(req.body, 'email', 'name');
 
 	if (req.file) {
-		const file = dataUri(req).content;
+		const file = dataUri(req.file.buffer).content;
 		const image = await uploader.upload(file, {
 			folder: 'books/users_images',
 			public_id: `${req.user.id}`,
