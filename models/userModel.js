@@ -24,6 +24,12 @@ const userSchema = new mongoose.Schema({
 		defaul: 'user',
 	},
 
+	image: {
+		type: String,
+		default:
+			'https://thumbs.dreamstime.com/b/default-avatar-profile-icon-vector-social-media-user-image-182145777.jpg',
+	},
+
 	password: {
 		type: String,
 		required: [true, 'Please provide a password'],
@@ -53,7 +59,7 @@ const userSchema = new mongoose.Schema({
 	},
 	createdAt: {
 		type: Date,
-		default: Date.now,
+		default: Date.now(),
 	},
 });
 

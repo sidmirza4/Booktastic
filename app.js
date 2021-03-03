@@ -5,6 +5,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
 
+const cloudinaryConfig = require('./config/cloudinaryConfig');
 const bookRouter = require('./routes/bookRoutes');
 const userRouter = require('./routes/userRoutes');
 
@@ -24,6 +25,8 @@ mongoose
 	})
 	.then(() => console.log('Successfully connected to DB'));
 
+// cloudinary config middleware
+app.use(cloudinaryConfig);
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

@@ -18,10 +18,7 @@ const bookSchema = new mongoose.Schema({
 		default: Date.now(),
 		select: false,
 	},
-	poster: {
-		type: String,
-		required: [true, 'A book must have a poster'],
-	},
+
 	images: Array,
 	authors: {
 		type: Array,
