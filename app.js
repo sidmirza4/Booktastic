@@ -27,7 +27,9 @@ mongoose.connect(dbUrl, {
 
 // cloudinary config middleware
 app.use(cloudinaryConfig);
-app.use(morgan('dev'));
+if (process.env.NODE_ENV === 'development') {
+	app.use(morgan('dev'));
+}
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());

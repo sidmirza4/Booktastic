@@ -1,8 +1,9 @@
-const { uploader } = require('cloudinary').v2;
+const { uploader, api } = require('cloudinary').v2;
 const factory = require('./factory');
 const Book = require('../models/bookModel');
 const catchAsync = require('../utils/catchAsync');
 const { upload, dataUri } = require('../middlewares/multer');
+const AppError = require('../utils/appError');
 
 exports.getAllBooks = factory.getAll(Book);
 exports.getBook = factory.getOne(Book);
@@ -46,6 +47,16 @@ exports.uploadBookImages = catchAsync(async (req, res, next) => {
 		req.body.images.push({ url: image.url, publicId: image.public_id })
 	);
 
+	next();
+});
+
+exports.deleteImagesFromCloudinary = catchAsync(async (req, res, next) => {
+	const book = await Book.findById(req.params.id);
+	if (!book) return next(new AppError('No book found with that id.'));
+
+	const publicIds = book.images.map(image => image.publicId);
+	publicIds.push(book.cover.publicId);
+	await api.delete_resources(publicIds);
 	next();
 });
 

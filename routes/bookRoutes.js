@@ -20,6 +20,11 @@ router
 	.route('/:id')
 	.get(bookController.getBook)
 	.patch(protect, restrictTo('editor', 'admin'), bookController.updateBook)
-	.delete(protect, restrictTo('admin'), bookController.deleteBook);
+	.delete(
+		protect,
+		restrictTo('admin'),
+		bookController.deleteImagesFromCloudinary,
+		bookController.deleteBook
+	);
 
 module.exports = router;
