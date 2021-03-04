@@ -1,5 +1,11 @@
 const AppError = require('../utils/appError');
 
+const handleMulterError = err => {
+	const message = `${err.field} can only have one image.`;
+
+	return new AppError(message, 400);
+};
+
 const handleCastErrorDB = err => {
 	const message = `Invalid ${err.path}: ${err.value}.`;
 
@@ -64,6 +70,8 @@ module.exports = (err, req, res, next) => {
 			error = handleValidationErrorDB(error);
 		if (error.name === 'JsonWebTokenError') error = handleJWTError();
 		if (error.name === 'TokenExpiredError') error = handleJWTExpired();
+		if (error.code === 'LIMIT_UNEXPECTED_FILE')
+			error = handleMulterError(error);
 		sendErrorProd(error, req, res);
 	}
 };

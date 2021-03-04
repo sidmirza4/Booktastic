@@ -25,6 +25,19 @@ const bookSchema = new mongoose.Schema({
 
 	images: Array,
 
+	ratingsAverage: {
+		type: Number,
+		default: 4,
+		min: [1, 'Rating must be above 1.0'],
+		max: [5, 'Rating must be below 5.0'],
+		set: val => Math.round(val * 10) / 10,
+	},
+
+	ratingsCount: {
+		type: Number,
+		default: 0,
+	},
+
 	authors: {
 		type: Array,
 		required: [true, 'a book must have one or more author(s)'],

@@ -71,6 +71,11 @@ userSchema.pre('save', async function (next) {
 	this.passwordConfirm = undefined;
 });
 
+userSchema.pre(/^find/, function (next) {
+	this.find({ active: { $ne: false } });
+	next();
+});
+
 userSchema.methods.isPasswordCorrect = async function (
 	inputPassword,
 	userPassword

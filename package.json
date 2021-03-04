@@ -1,45 +1,45 @@
 {
-  "name": "books",
-  "version": "1.0.0",
-  "private": true,
-  "author": "Mohd Shahid",
-  "license": "MIT",
-  "description": "Download your favorite among the billions of books",
-  "scripts": {
-    "dev": "nodemon ./bin/www",
-    "start": "node ./bin/www",
-    "debug": "ndb ./bin/www"
-  },
-  "dependencies": {
-    "bcrypt": "^5.0.1",
-    "cloudinary": "^1.25.0",
-    "cookie-parser": "~1.4.4",
-    "datauri": "^3.0.0",
-    "debug": "~2.6.9",
-    "dotenv": "^8.2.0",
-    "express": "~4.16.1",
-    "http-errors": "~1.6.3",
-    "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.11.15",
-    "morgan": "~1.9.1",
-    "multer": "^1.4.2",
-    "slugify": "^1.4.7",
-    "validator": "^13.5.2"
-  },
-  "devDependencies": {
-    "eslint": "^7.20.0",
-    "eslint-config-airbnb": "^18.2.1",
-    "eslint-config-prettier": "^8.1.0",
-    "eslint-plugin-import": "^2.22.1",
-    "eslint-plugin-jsx-a11y": "^6.4.1",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-prettier": "^3.3.1",
-    "eslint-plugin-react": "^7.22.0",
-    "ndb": "^1.1.5",
-    "nodemon": "^2.0.7",
-    "prettier": "^2.2.1"
-  },
-  "engines": {
-    "node": ">=14"
-  }
+	"name": "books",
+	"version": "1.0.0",
+	"private": true,
+	"author": "Mohd Shahid",
+	"license": "MIT",
+	"description": "Download your favorite among the billions of books",
+	"scripts": {
+		"dev": "nodemon ./bin/www",
+		"start": "NODE_ENV=production node ./bin/www",
+		"debug": "ndb ./bin/www"
+	},
+	"dependencies": {
+		"bcrypt": "^5.0.1",
+		"cloudinary": "^1.25.0",
+		"cookie-parser": "~1.4.4",
+		"datauri": "^3.0.0",
+		"debug": "~2.6.9",
+		"dotenv": "^8.2.0",
+		"express": "~4.16.1",
+		"http-errors": "~1.6.3",
+		"jsonwebtoken": "^8.5.1",
+		"mongoose": "^5.11.15",
+		"morgan": "~1.9.1",
+		"multer": "^1.4.2",
+		"slugify": "^1.4.7",
+		"validator": "^13.5.2"
+	},
+	"devDependencies": {
+		"eslint": "^7.20.0",
+		"eslint-config-airbnb": "^18.2.1",
+		"eslint-config-prettier": "^8.1.0",
+		"eslint-plugin-import": "^2.22.1",
+		"eslint-plugin-jsx-a11y": "^6.4.1",
+		"eslint-plugin-node": "^11.1.0",
+		"eslint-plugin-prettier": "^3.3.1",
+		"eslint-plugin-react": "^7.22.0",
+		"ndb": "^1.1.5",
+		"nodemon": "^2.0.7",
+		"prettier": "^2.2.1"
+	},
+	"engines": {
+		"node": ">=14"
+	}
 }
