@@ -13,7 +13,7 @@ exports.getAll = Model => {
 	});
 };
 
-exports.creatOne = Model =>
+exports.createOne = Model =>
 	catchAsync(async (req, res, next) => {
 		const newDoc = await Model.create(req.body);
 

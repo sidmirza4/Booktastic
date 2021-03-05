@@ -3,6 +3,7 @@ const { promisify } = require('util');
 
 const catchAsync = require('../utils/catchAsync');
 const User = require('../models/userModel');
+const Review = require('../models/reviewModel');
 const AppError = require('../utils/appError');
 
 const signToken = id =>

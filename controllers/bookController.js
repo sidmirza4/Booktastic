@@ -60,6 +60,6 @@ exports.deleteImagesFromCloudinary = catchAsync(async (req, res, next) => {
 	next();
 });
 
-exports.createBook = factory.creatOne(Book);
+exports.createBook = factory.createOne(Book);
 exports.updateBook = factory.updateOne(Book);
 exports.deleteBook = factory.deleteOne(Book);
