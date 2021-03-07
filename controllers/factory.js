@@ -1,9 +1,20 @@
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
+const APIFeatures = require('../utils/apiFeatures');
 
 exports.getAll = Model => {
 	return catchAsync(async (req, res, next) => {
-		const docs = await Model.find({});
+		let filter = {};
+		// for the nested review route
+		if (req.params.bookId) filter = { book: req.params.bookId };
+
+		const features = new APIFeatures(Model.find(filter), req.query)
+			.filter()
+			.sort()
+			.limitFields()
+			.paginate();
+
+		const docs = await features.query;
 
 		res.status(200).json({
 			status: 'success',

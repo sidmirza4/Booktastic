@@ -25,6 +25,10 @@ const bookSchema = new mongoose.Schema({
 
 	images: Array,
 
+	genres: Array,
+
+	downloadUrl: String,
+
 	ratingsAverage: {
 		type: Number,
 		default: 4,
