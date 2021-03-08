@@ -22,7 +22,7 @@ class APIFeatures {
 
 	sort() {
 		if (this.queryStringsObj.sort) {
-			const sortBy = this.queryStringsObj.sortBy.split(',').join(' ');
+			const sortBy = this.queryStringsObj.sort.split(',').join(' ');
 			this.query = this.query.sort(sortBy);
 		} else {
 			this.query = this.query.sort('-createdAt');

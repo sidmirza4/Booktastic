@@ -13,6 +13,12 @@ exports.processBookImages = upload.fields([
 	{ name: 'images' },
 ]);
 
+exports.aliasTopBooks = (req, res, next) => {
+	req.query.limit = '10';
+	req.query.sort = '-ratingsAverage';
+	next();
+};
+
 exports.uploadBookImages = catchAsync(async (req, res, next) => {
 	if (!req.files) return next();
 	if (!req.files.cover || !req.files.images) return next();

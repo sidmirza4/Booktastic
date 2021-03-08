@@ -12,14 +12,21 @@ const bookSchema = new mongoose.Schema({
 		],
 		minLength: [3, 'book title must be at least 3 characters long'],
 	},
+	subtitle: String,
 	createdAt: {
 		type: Date,
 		default: Date.now(),
 		select: false,
 	},
 
+	isbn: { type: String, required: [true, 'A book must have an ISBN'] },
+	pages: {
+		type: String,
+		required: [true, 'A book must have number of pages'],
+	},
+
 	cover: {
-		url: String,
+		url: { type: String, required: [true, 'A book must have a cover'] },
 		publicId: String,
 	},
 
@@ -46,7 +53,7 @@ const bookSchema = new mongoose.Schema({
 		type: Array,
 		required: [true, 'a book must have one or more author(s)'],
 	},
-	publishedBy: {
+	publisher: {
 		type: String,
 		required: [true, 'A book must have a publisher'],
 	},
@@ -55,11 +62,15 @@ const bookSchema = new mongoose.Schema({
 		type: String,
 		required: [true, 'a book must have a description'],
 	},
+	website: String,
 	slug: {
 		type: String,
 		unique: true,
 	},
 });
+
+bookSchema.index({ ratingsAverage: -1 });
+bookSchema.index({ slug: 1 });
 
 bookSchema.pre('save', function (next) {
 	this.slug = slugify(this.title, { lower: true });

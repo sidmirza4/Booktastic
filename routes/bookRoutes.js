@@ -7,6 +7,11 @@ const { restrictTo, protect } = require('../controllers/authController');
 const router = express.Router();
 
 router.use('/:bookId/reviews', reviewRoutes);
+router.get(
+	'/top-10-books',
+	bookController.aliasTopBooks,
+	bookController.getAllBooks
+);
 
 router
 	.route('/')
