@@ -70,6 +70,7 @@ const bookSchema = new mongoose.Schema({
 });
 
 bookSchema.index({ ratingsAverage: -1 });
+bookSchema.index({ title: 1 });
 bookSchema.index({ slug: 1 });
 
 bookSchema.pre('save', function (next) {
