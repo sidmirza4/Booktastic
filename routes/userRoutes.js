@@ -6,6 +6,7 @@ const {
 	logout,
 	protect,
 	restrictTo,
+	updatePassword,
 } = require('../controllers/authController');
 const {
 	getAllUsers,
@@ -27,6 +28,7 @@ router.get('/logout', logout);
 
 // protect all routes below this line
 router.use(protect);
+router.patch('/update-my-password', updatePassword);
 router.get('/me', getMe, getUser);
 router.patch('/updateMe', uploadUserPhoto, updateMe);
 router.delete('/deleteMe', deleteMe);

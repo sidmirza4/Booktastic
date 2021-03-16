@@ -3,7 +3,6 @@ const { promisify } = require('util');
 
 const catchAsync = require('../utils/catchAsync');
 const User = require('../models/userModel');
-const Review = require('../models/reviewModel');
 const AppError = require('../utils/appError');
 
 const signToken = id =>
@@ -65,6 +64,26 @@ exports.logout = (req, res) => {
 	});
 	res.status(200).json({ status: 'success' });
 };
+
+exports.updatePassword = catchAsync(async (req, res, next) => {
+	const { currentPassword, newPassword, confirmPassword } = req.body;
+	const user = await User.findById(req.user.id).select('+password');
+	if (!user) return new AppError('Something went wrong', 404);
+	const isPasswordCorrect = await user.isPasswordCorrect(
+		currentPassword,
+		user.password
+	);
+	if (!isPasswordCorrect)
+		return next(
+			new AppError('Please enter current password correctly', 401)
+		);
+
+	user.password = newPassword;
+	user.passwordConfirm = confirmPassword;
+	await user.save();
+
+	createSendToken(user, 200, req, res);
+});
 
 exports.protect = catchAsync(async (req, res, next) => {
 	let token;

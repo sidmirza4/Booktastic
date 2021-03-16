@@ -5,3 +5,7 @@ exports.filterObj = (obj, ...allowedFields) => {
 	});
 	return newObj;
 };
+
+exports.escapreRegExp = string => {
+	return string.replace(/[-/\\^$*+?.()|[\]{}]/g, '\\^$&');
+};

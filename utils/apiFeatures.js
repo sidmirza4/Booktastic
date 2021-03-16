@@ -53,6 +53,22 @@ class APIFeatures {
 
 		return this;
 	}
+
+	// search() {
+	// 	if (this.queryStringsObj.search) {
+	// 		// this.queryStringsObj.search = new RegExp(
+	// 		// 	escapreRegExp(this.queryStringsObj.search, 'gi')
+	// 		// );
+
+	// 		this.query = this.query.find({
+	// 			title: {
+	// 				$regex: this.queryStringsObj.search,
+	// 				$options: 'i',
+	// 			},
+	// 		});
+	// 	}
+	// 	return this;
+	// }
 }
 
 module.exports = APIFeatures;
