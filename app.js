@@ -36,7 +36,7 @@ mongoose.connect(dbUrl, {
 });
 
 // global middlewares
-app.use(cors());
+app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
 // https://expressjs.com/en/resources/middleware/cors.html
 app.options('*', cors());
 app.use(helmet());

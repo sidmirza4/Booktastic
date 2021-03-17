@@ -14,9 +14,7 @@ const createSendToken = (user, statusCode, req, res) => {
 	const token = signToken(user._id);
 
 	res.cookie('jwt', token, {
-		expires: new Date(
-			Date.now() + process.env.JWT_EXPIRES_IN * 24 * 60 * 60 * 1000
-		),
+		maxAge: parseInt(process.env.JWT_EXPIRES_IN, 10),
 		httpOnly: true,
 		secure: req.secure || req.headers['x-forwarded-proto'] === 'https',
 	});
@@ -26,7 +24,7 @@ const createSendToken = (user, statusCode, req, res) => {
 	res.status(statusCode).json({
 		status: 'success',
 		token,
-		data: { email: user.email, name: user.name },
+		data: { email: user.email, name: user.name, image: user.image },
 	});
 };
 
@@ -59,7 +57,7 @@ exports.login = catchAsync(async (req, res, next) => {
 
 exports.logout = (req, res) => {
 	res.cookie('jwt', 'loggedOut', {
-		expires: new Date(Date.now() + 10 * 1000),
+		maxAge: 1000,
 		httpOnly: true,
 	});
 	res.status(200).json({ status: 'success' });
